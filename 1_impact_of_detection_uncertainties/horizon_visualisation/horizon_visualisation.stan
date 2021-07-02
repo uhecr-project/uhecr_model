@@ -212,7 +212,7 @@ functions {
   * Integrand as a functional of get_phi(xi) used in calcultion of beta_bh.
   * Described in de Domenico and Insolia (2013).
   */
-  real[] integrand(real xi, real[] state, real[] params, real[] x_r, int[] x_i) { 
+  real[] integrand(real xi, real[] state, real[] params, data real[] x_r, data int[] x_i) { 
     
     real dstatedxi[1];
     
@@ -227,7 +227,7 @@ functions {
   * Losses due to Bethe-Heitler pair production.
   * Described in de Domenico amnd Insolia (2013).    
   */
-  real beta_bh(real z, real E, real[] xiout, real[] x_r, int[] x_i) {
+  real beta_bh(real z, real E, real[] xiout, data real[] x_r, data int[] x_i) {
     
     real params[2];
     real integration_result[1,1];
@@ -265,7 +265,7 @@ functions {
   * Total energy losses as a function of distance.
   * @param E the energy in eV (!)
   */
-  real dEdr(real r, real E, real[] xiout, real[] x_r, int[] x_i) {
+  real dEdr(real r, real E, real[] xiout, data real[] x_r, data int[] x_i) {
     
     real c = 3.066e-7; // Mpc yr^-1
     real DH = 4285.714; // Mpc
@@ -284,7 +284,7 @@ functions {
   * ODE system to be solved for arrival energy.
   * NB: E in eV (!)
   */
-  real[] E_ode_sim(real r, real[] state, real[] params, real[] x_r, int[] x_i) {
+  real[] E_ode_sim(real r, real[] state, real[] params, data real[] x_r, data int[] x_i) {
     
     real dstatedr[1];
     
@@ -299,7 +299,7 @@ functions {
   * ODE system for be solved for equivalent source energy.
   * Nb: E in eV (!)
   */
-  real[] E_ode_rev_sim(real r, real[] state, real[] params, real[] x_r, int[] x_i) {
+  real[] E_ode_rev_sim(real r, real[] state, real[] params, data real[] x_r, data int[] x_i) {
     
     real dstatedr[1];
     real D = params[1];
@@ -392,7 +392,7 @@ functions {
   * ODE system to be solved for arrival energy.
   * NB: E in eV (!)
   */
-  real[] E_ode(real r, real[] state, real[] params, real[] x_r, int[] x_i) {
+  real[] E_ode(real r, real[] state, real[] params, data real[] x_r, data int[] x_i) {
     
     real dstatedr[1];
     
@@ -407,7 +407,7 @@ functions {
   * ODE system for be solved for equivalent source energy.
   * Nb: E in eV (!)
   */
-  real[] E_ode_rev(real r, real[] state, real[] params, real[] x_r, int[] x_i) {
+  real[] E_ode_rev(real r, real[] state, real[] params, data real[] x_r, data int[] x_i) {
     
     real dstatedr[1];
     real D = params[1];

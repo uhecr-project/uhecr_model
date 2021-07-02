@@ -158,7 +158,7 @@ real[] integrand(real xi, real[] state, real[] params, real[] x_r, int[] x_i) {
  * Losses due to Bethe-Heitler pair production.
  * Described in de Domenico amnd Insolia (2013).    
  */
-real beta_bh(real z, real E, real[] xiout, real[] x_r, int[] x_i) {
+real beta_bh(real z, real E, real[] xiout, data real[] x_r, data int[] x_i) {
   
   real params[2];
   real integration_result[1,1];
@@ -196,7 +196,7 @@ real beta_bh_approx(real z, real E) {
  * Total energy losses as a function of distance.
  * @param E the energy in eV (!)
  */
-real dEdr(real r, real E, real[] xiout, real[] x_r, int[] x_i) {
+real dEdr(real r, real E, real[] xiout, data real[] x_r, data int[] x_i) {
   
   real c = 3.066e-7; // Mpc yr^-1
   real DH = 4285.714; // Mpc
@@ -215,7 +215,7 @@ real dEdr(real r, real E, real[] xiout, real[] x_r, int[] x_i) {
  * ODE system to be solved for arrival energy.
  * NB: E in eV (!)
  */
-real[] E_ode_sim(real r, real[] state, real[] params, real[] x_r, int[] x_i) {
+real[] E_ode_sim(real r, real[] state, real[] params, data real[] x_r, data int[] x_i) {
   
   real dstatedr[1];
   
@@ -230,7 +230,7 @@ real[] E_ode_sim(real r, real[] state, real[] params, real[] x_r, int[] x_i) {
  * ODE system for be solved for equivalent source energy.
  * Nb: E in eV (!)
  */
-real[] E_ode_rev_sim(real r, real[] state, real[] params, real[] x_r, int[] x_i) {
+real[] E_ode_rev_sim(real r, real[] state, real[] params, data real[] x_r, data int[] x_i) {
   
   real dstatedr[1];
   real D = params[1];
@@ -266,7 +266,7 @@ real get_source_threshold_energy_sim(real Eth, data real[] D, data real[] x_r, i
  * Get the vector of source threshold energies for all sources, 
  * including the background component.
  */
-vector get_Eth_src_sim(real Eth, data real[,] D, data real[] x_r, int[] x_i) {
+vector get_Eth_src_sim(real Eth, data real[,] D, data real[] x_r, data int[] x_i) {
 
   int N = num_elements(D);
   vector[N] Eth_src;
@@ -284,7 +284,7 @@ vector get_Eth_src_sim(real Eth, data real[,] D, data real[] x_r, int[] x_i) {
  * for a given intial energy E.
  * Solves the ODE system dE/dr = - E / Lloss
  */
-real get_arrival_energy_sim(real E, data real[] D, data real[] x_r, int[] x_i) {
+real get_arrival_energy_sim(real E, data real[] D, data real[] x_r, data int[] x_i) {
   
   real Earr;
   real params[0];
@@ -323,7 +323,7 @@ real dEdr_approx(real r, real E) {
  * ODE system to be solved for arrival energy.
  * NB: E in eV (!)
  */
-real[] E_ode(real r, real[] state, real[] params, real[] x_r, int[] x_i) {
+real[] E_ode(real r, real[] state, real[] params, data real[] x_r, data int[] x_i) {
   
   real dstatedr[1];
   
@@ -338,7 +338,7 @@ real[] E_ode(real r, real[] state, real[] params, real[] x_r, int[] x_i) {
  * ODE system for be solved for equivalent source energy.
  * Nb: E in eV (!)
  */
-real[] E_ode_rev(real r, real[] state, real[] params, real[] x_r, int[] x_i) {
+real[] E_ode_rev(real r, real[] state, real[] params, data real[] x_r, data int[] x_i) {
   
   real dstatedr[1];
   real D = params[1];
@@ -354,7 +354,7 @@ real[] E_ode_rev(real r, real[] state, real[] params, real[] x_r, int[] x_i) {
  * Calculate equivalent energy at the source for an arrival energy of Eth.
  * Solves the ODE system  dE/dr = E / Lloss.
  */
-real get_source_threshold_energy(real Eth, data real[] D, data real[] x_r, int[] x_i) {
+real get_source_threshold_energy(real Eth, data real[] D, data real[] x_r, data int[] x_i) {
   
   real Eth_src;
   real params[1];
@@ -374,7 +374,7 @@ real get_source_threshold_energy(real Eth, data real[] D, data real[] x_r, int[]
  * Get the vector of source threshold energies for all sources,
  * including the background component.
  */
-vector get_Eth_src(real Eth, data real[,] D, data real[] x_r, int[] x_i) {
+vector get_Eth_src(real Eth, data real[,] D, data real[] x_r, data int[] x_i) {
   
   int N = num_elements(D);
   vector[N] Eth_src;
@@ -392,7 +392,7 @@ vector get_Eth_src(real Eth, data real[,] D, data real[] x_r, int[] x_i) {
  * for a given intial energy E.
  * Solves the ODE system dE/dr = - E / Lloss
  */
-real get_arrival_energy(real E, data real[] D, data real[] x_r, int[] x_i) {
+real get_arrival_energy(real E, data real[] D, data real[] x_r, data int[] x_i) {
   
   real Earr;
   real params[0];
