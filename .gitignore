@@ -394,3 +394,12 @@ TSWLatexianTemp*
 
 # vscode related files
 .vscode/**
+
+# files related to CRPropa GMF
+**.mldat
+lens.cfg
+
+# figure files
+**.png
+**.svg
+**.jpg
