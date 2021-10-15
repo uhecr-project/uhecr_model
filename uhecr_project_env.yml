@@ -1,4 +1,4 @@
-name: cartopy
+name: uhecr_env
 channels:
   - conda-forge
   - defaults
@@ -22,15 +22,16 @@ dependencies:
   - brotlipy=0.7.0=py38h497a2fe_1001
   - bzip2=1.0.8=h7f98852_4
   - c-ares=1.17.1=h7f98852_1
-  - ca-certificates=2021.5.30=ha878542_0
+  - ca-certificates=2021.10.8=ha878542_0
   - cached-property=1.5.2=py_0
   - cartopy=0.18.0=py38h0d9ca2b_1
-  - certifi=2021.5.30=py38h578d9bd_0
+  - certifi=2021.10.8=py38h578d9bd_0
   - cffi=1.14.6=py38ha65f79e_0
   - cfitsio=3.470=hb418390_7
   - cftime=1.5.0=py38h6323ea4_0
   - chardet=4.0.0=py38h578d9bd_1
   - charset-normalizer=2.0.0=pyhd8ed1ab_0
+  - colorama=0.4.4=pyh9f0ad1d_0
   - cryptography=3.4.7=py38ha5dfef3_0
   - curl=7.71.1=h8f29fe8_2
   - cycler=0.10.0=py38_0
@@ -182,6 +183,7 @@ dependencies:
   - tk=8.6.10=hbc83047_0
   - toml=0.10.2=pyhd8ed1ab_0
   - tornado=6.1=py38h27cfd23_0
+  - tqdm=4.62.3=pyhd8ed1ab_0
   - traitlets=5.0.5=py_0
   - typing-extensions=3.10.0.0=hd3eb1b0_0
   - typing_extensions=3.10.0.0=pyh06a4308_0
@@ -199,4 +201,3 @@ dependencies:
   - zstd=1.4.9=haebb681_0
   - pip:
     - joblib==1.0.1
-prefix: /opt/miniconda3/envs/cartopy

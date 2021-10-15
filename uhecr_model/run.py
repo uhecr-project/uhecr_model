@@ -75,6 +75,9 @@ if __name__ == "__main__":
 
     # set up the configuration lists
 
+    Nsim = 1000  # for TA
+    # Nsim = 2500  # for Auger
+
     if args.run_all:  # use maximum configuration
         sources = ["SBG_23", "2FHL_250Mpc", "swift_BAT_213"]
         detectors = ["TA2015", "auger2014"]
@@ -89,8 +92,8 @@ if __name__ == "__main__":
     elif args.debug is not None:  # run the debug case
         sources = ["SBG_23"]
         detectors = ["TA2015"]
-        sim_models = ["joint"]
-        sim_models_for_fit = ["joint"]
+        sim_models = ["joint_gmf"]
+        sim_models_for_fit = ["joint_gmf"]
         fit_models = ["arrival_direction", "joint", "joint_gmf"]
         ptypes = ["p"]
         seeds = [19990308]
@@ -114,9 +117,6 @@ if __name__ == "__main__":
         # seeds = [19990308, 4968460, 165490]
         end_labels = [None]
         verbose = args.verbose
-
-        Nsim = 1000  # for TA
-        # Nsim = 2500  # for Auger
 
         # when performing dryrun, enable verbosity
         if args.dryrun:

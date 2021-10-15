@@ -115,7 +115,7 @@ if __name__ == "__main__":
         detectors = ["TA2015", "auger2014"]
         sim_models = ["joint"]
         sim_models_for_fit = ["joint"]
-        fit_models = ["arrival_direction"]
+        fit_models = ["joint", "joint_gmf"]
         ptypes = ["p", "N"]
         # seeds = [
         #     19990308, 747072, 402309, 476859, 638121, 821056, 626445, 125326,
