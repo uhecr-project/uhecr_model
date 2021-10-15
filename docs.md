@@ -3,7 +3,7 @@
 ## Step-by-step instructions
 
 1. Create the environment using the .yml file.
-2. Install both `stan_utility` and `fancy` from the `uhecr-project` organization (via pip)
+2. Install both `stan_utility` and `fancy` from the `uhecr-project` organization (via git -> `pip install -e .`)
 
 
 **Note:** skip steps 3, 4 if the necessary table and UHECR datasets are already present (and no new settings are created (ex. if you want to perform the analysis with a new dataset, you need to run these steps)).
@@ -11,6 +11,8 @@
 
 3. Run `uhecr_model/tables/precompute_tables.py` to precompute the tables for kappa and energy evaluations.
 4. Run `data/precompute_kappa_gmf.ipynb` to precompute kappa_GMF for each UHECR dataset.
+
+
 5. Initialize the runs by `run.py`. Here is how to use this:
 
     a. Modify the configurations in line 104 for custom runs
