@@ -407,3 +407,6 @@ lens.cfg
 # ignore output files
 **/outputs/**
 **/output/**
+
+# make exception for txt file with TA data
+!TAdata_Egt57.txt
