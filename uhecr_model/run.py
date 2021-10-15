@@ -83,41 +83,40 @@ if __name__ == "__main__":
         fit_models = ["arrival_direction", "joint", "joint_gmf"]
         ptypes = ["p", "He", "N", "Si", "Fe"]
         seeds = [19990308, 4968460, 165490]
-        end_labels = [None, "tight_B"]
+        end_labels = [None, "tight_B", "limit_L"]
         verbose = False
 
     elif args.debug is not None:  # run the debug case
-        sources = ["2FHL_250Mpc"]
-        detectors = ["auger2014"]
+        sources = ["SBG_23"]
+        detectors = ["TA2015"]
         sim_models = ["joint"]
         sim_models_for_fit = ["joint"]
         fit_models = ["arrival_direction", "joint", "joint_gmf"]
-        ptypes = ["N"]
+        ptypes = ["p"]
         seeds = [19990308]
-        end_labels = ["tight_B"]
+        end_labels = [None]
         verbose = True
         args.mode = args.debug
-
-        # Nsim = 1000
 
     else:  # use config manually set up over here
         sources = ["SBG_23"]
         detectors = ["TA2015"]
         sim_models = ["joint"]
         sim_models_for_fit = ["joint"]
-        fit_models = ["arrival_direction", "joint", "joint_gmf"]
-        ptypes = ["p", "N"]
-        # seeds = [
-        #     19990308, 747072, 402309, 476859, 638121, 821056, 626445, 125326,
-        #     568333, 606135, 214978, 858061, 41247, 556608, 508103, 716897,
-        #     878370, 942554, 964306, 722605, 919183, 992879, 154451, 714282,
-        #     437735, 519750, 390711
-        # ]
-        seeds = [19990308]
-        end_labels = ["noIGMF"]
+        fit_models = ["arrival_direction", "joint"]
+        ptypes = ["p"]
+        seeds = [
+            19990308, 747072, 402309, 476859, 638121, 821056, 626445, 125326,
+            568333, 606135, 214978, 858061, 41247, 556608, 508103, 716897,
+            878370, 942554, 964306, 722605, 919183, 992879, 154451, 714282,
+            437735, 519750, 390711
+        ]
+        # seeds = [19990308, 4968460, 165490]
+        end_labels = [None]
         verbose = args.verbose
 
-        Nsim = 1250
+        Nsim = 1000  # for TA
+        # Nsim = 2500  # for Auger
 
         # when performing dryrun, enable verbosity
         if args.dryrun:
@@ -151,8 +150,8 @@ if __name__ == "__main__":
         progress_file = os.path.join(outputs_path, "progress_report_debug.txt")
 
     # if it exists, remove it to reset it
-    if os.path.exists(progress_file):
-        os.remove(progress_file)
+    # if os.path.exists(progress_file):
+    #     os.remove(progress_file)
 
     # if os.path.exists(progress_file):
     #     progress_file = os.path.join(outputs_path, "progress_report_1.txt")
@@ -192,7 +191,7 @@ if __name__ == "__main__":
             # modify B-field to those that converge with N
             B = 3 if end_label == "tight_B" else 20
 
-            simulation.set_simulation(B=B, Nsim=1000)
+            simulation.set_simulation(B=B, Nsim=Nsim)
 
             if not args.dryrun:
                 simulation.simulate()

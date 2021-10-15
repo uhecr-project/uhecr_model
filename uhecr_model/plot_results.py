@@ -111,17 +111,22 @@ if __name__ == "__main__":
         args.mode = args.debug
 
     else:  # use config manually set up over here
-        sources = ["SBG_23"]
-        detectors = ["TA2015"]
+        sources = ["SBG_23", "2FHL_250Mpc", "swift_BAT_213"]
+        detectors = ["TA2015", "auger2014"]
         sim_models = ["joint"]
         sim_models_for_fit = ["joint"]
-        fit_models = ["arrival_direction", "joint", "joint_gmf"]
+        fit_models = ["arrival_direction"]
         ptypes = ["p", "N"]
-        # seeds = [19990308, 4968460, 165490]
-        seeds = [19990308]
+        # seeds = [
+        #     19990308, 747072, 402309, 476859, 638121, 821056, 626445, 125326,
+        #     568333, 606135, 214978, 858061, 41247, 556608, 508103, 716897,
+        #     878370, 942554, 964306, 722605, 919183, 992879, 154451, 714282,
+        #     437735, 519750, 390711
+        # ]
+        seeds = [19990308, 4968460, 165490]
         end_labels = [None]
+        header = "full_run"
         verbose = args.verbose
-        header = "noIGMF"
 
         # when performing dryrun, enable verbosity
         if args.dryrun:
@@ -240,12 +245,12 @@ if __name__ == "__main__":
 
                     if not args.dryrun:
 
-                        output_fig_creator.src_uhecr_skymap()
+                        # output_fig_creator.src_uhecr_skymap()
                         output_fig_creator.corner()
 
-                        if fit_model.find("joint") != -1:
-                            output_fig_creator.dist(param="B")
-                            output_fig_creator.association_skymap()
+                        # if fit_model.find("joint") != -1:
+                        #     output_fig_creator.dist(param="B")
+                        #     output_fig_creator.association_skymap()
 
                         src_dist_creator.plotdist(compare_label="model",
                                                   extend=True)
@@ -274,11 +279,14 @@ if __name__ == "__main__":
 
                     if fit_model.find("joint") != -1:
                         output_fig_creator.association_skymap()
-                        output_fig_creator.dist(param="f")
+                        output_fig_creator.dist(param="B")
 
                     output_fig_creator.corner()
 
                     src_dist_creator.plotdist(compare_label="model",
+                                              extend=True)
+                    
+                    src_dist_creator.plotdist(compare_label="detector",
                                               extend=True)
 
             print("\n")
