@@ -8,6 +8,7 @@ import matplotlib as mpl
 from matplotlib import pyplot as plt
 import seaborn as sns
 from pandas import DataFrame
+import cartopy.crs as ccrs
 from astropy.coordinates import SkyCoord
 from astropy import units as u
 import csv
@@ -371,7 +372,29 @@ class OutputFigures():
                 writer.writeheader()
             writer.writerow(fig_args_dom_srcs)
 
-    def association_skymap(self, coord="G"):
+    def plot_keysrcs(self, skymap):
+        '''Plot key sources onto skymap'''
+        plot_srcs_glons = np.array([309.55923, 283.7254, 141.409462, 314.58357, 97.363768, 95.71876,
+                             138.172576, 305.271539, 162.20886952, 138.31448603])
+        plot_srcs_glats = np.array([19.403927, 74.5294, 40.566959, 31.972703, -87.964548, 11.672735,
+                                    10.579852, 13.340164, 81.54309170, 68.85666124])
+        plot_srcs_names = ["Cen A", "M87", "M82", "M83", "NGC253", "NGC6946", 
+                            "IC342", "NGC4945", "NGC4395", "M106"]
+        plot_srcs_textloc = [(-5, 15), (30, -5), (-5, -5), (-5, 15), (0, -5), (45, -5), 
+                            (5, 15), (-5, 10), (0, 20), (30, -5)]
+
+        transform_ax = ccrs.PlateCarree()._as_mpl_transform(skymap.ax)
+
+        src_color = '#f62652'
+        skymap.scatter(180 - plot_srcs_glons, plot_srcs_glats, color = src_color, alpha = 1.0, zorder = 20, marker="*", s=60.0)
+
+        srcname_color = "#fd3c65"
+        for i, (lon, lat) in enumerate(np.nditer([plot_srcs_glons, plot_srcs_glats])):
+            skymap.ax.annotate(plot_srcs_names[i], (180 - (180 - lon), lat), xycoords=transform_ax, ha="right", va="top", 
+                            zorder=40, textcoords='offset points', xytext=plot_srcs_textloc[i], color=srcname_color, weight='bold',
+                            fontsize=10)
+
+    def association_skymap(self, coord="G", key_srcs=True):
         '''Plot association skymap between sources and UHECRs'''
 
         uhecr_p = self.eval_association_probs()
@@ -474,6 +497,10 @@ class OutputFigures():
             color=lightpurple,
             alpha=0.01,
         )
+
+        # plot key sources
+        if key_srcs:
+            self.plot_keysrcs(skymap)
 
         # Colorbar
         cb_ax = plt.axes([0.25, 0.07, .5, .05], frameon=True)
@@ -728,7 +755,7 @@ class OutputFigures():
         fig, ax = plt.subplots(figsize=(6, 4))
 
         fig_params = {
-            "f": ["$f$", [0.9, 1], [0.9, 0.95, 1], "f"],
+            "f": ["$f$", [0, 1], [0, 0.5, 1], "f"],
             "B": ["$B$ / nG", [0, 50], [0, 25, 50], "B", [0, 0.05, 0.1]],
             "alpha": ["$\alpha$", [3, 6], [3, 4.5, 6], "\alpha"],
             "L": [r'$L$ / $10^{38}$ $\mathrm{yr}^{-1}$', 0, 0, "L"]
@@ -746,21 +773,24 @@ class OutputFigures():
         if param == "L":
             result_fit = result_fit * 10
 
+        distcolor = midblue if self.model == "joint_gmf" else purple
+            
+
         sns.distplot(result_fit,
                      hist=False,
                      kde_kws={
                          'shade': True,
                          'lw': 2
                      },
-                     color=purple)
+                     color=distcolor)
 
         if self.sim:
             f_true = Results(self.sim_output_file).get_truths(['f'])['f']
             ax.axvline(f_true, 0, 10, color='k', zorder=3, lw=2., alpha=0.7)
 
-        # ax.set_xlim(fig_params[param][1])
+        ax.set_xlim(fig_params[param][1])
         ax.set_xlabel(fig_params[param][0], fontsize=14)
-        # ax.set_xticks(fig_params[param][2])
+        ax.set_xticks(fig_params[param][2])
         # ax.set_yticks(fig_params[param][4])
         ax.set_ylabel('$P({0} | \hat{{E}}, \hat{{\omega}})$'.format(
             fig_params[param][3]),
@@ -919,14 +949,6 @@ class SourceUHECRDist():
         # return output_files
         # get the batch of output file to read the source association fractions from
         output_files = []
-        # if self.end_label is not None:
-        #     output_file = "{0}_{1}_{2}_{3}_{4}.h5".format(
-        #         self.source, self.detector, self.seed, self.ptype,
-        #         self.end_label)
-        # else:
-        #     output_file = "{0}_{1}_{2}_{3}.h5".format(self.source,
-        #                                               self.detector, self.seed,
-        #                                               self.ptype)
 
         if self.end_label is not None:
             output_file = "{{0}}_{{1}}_{{2}}_{{3}}_{0}.h5".format(
@@ -945,8 +967,6 @@ class SourceUHECRDist():
             model_name = self.model if compare_label != "model" else value
 
             if self.sim:
-                # sim_fmt_list = output_fmt_list[
-                #     1:]  # model information contained with dir structure
                 sim_fmt_list = output_fmt_list
                 sim_output_file = output_file.format(*sim_fmt_list)
 
@@ -1008,14 +1028,10 @@ class SourceUHECRDist():
 
                 # modify seed part (index 3) to the seed in config dict
                 output_fmt_list[2] = seed
-                # print(output_fmt_list)
-                # output_fmt_list_per_seed = deepcopy(output_fmt_list)
-                # output_fmt_list_per_seed[3] = seed
 
                 # # output file from simulation / fitting
                 analysis_output_file = output_file.format(*output_fmt_list)
 
-                # print(analysis_output_file)
 
                 model_name = self.model if compare_label != "model" else value
 
@@ -1033,11 +1049,7 @@ class SourceUHECRDist():
 
                 output_files_per_value.append(analysis_output_file)
 
-            # print(output_files_per_value)
-
             output_files.append(output_files_per_value)
-
-            # print(output_files)
 
         return output_files
 
@@ -1059,10 +1071,9 @@ class SourceUHECRDist():
                 for output_file in output_files_per_model:
                     f_i = Results(output_file).get_chain(['f'])['f']
                     f_list.append(f_i)
-                # print(np.array(f_list).shape)
 
                 f_avg = np.mean(np.array(f_list), axis=0)
-                print(f_avg.shape)
+                # print(f_avg.shape)
                 self.f_list.append(f_avg)
 
         else:
@@ -1103,8 +1114,6 @@ class SourceUHECRDist():
             labels = self.config_dict[compare_label]
 
         for i, f in enumerate(self.f_list):
-            # print(len(self.config_dict[compare_label]))
-            # if i < len(self.config_dict[compare_label]):
             sns.distplot(f,
                          hist=False,
                          kde_kws={
