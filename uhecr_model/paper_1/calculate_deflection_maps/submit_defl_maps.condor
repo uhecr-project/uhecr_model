@@ -1,0 +1,58 @@
+Executable      = condor_runner.sh
+Universe        = vanilla
+#request_gpus   = 1
+request_cpus    = 1
+request_memory  = 2 GB
+run_as_owner    = True
+Error           = logs/err
+Output          = logs/out
+Log             = logs/log
+
+Arguments = --detector=auger2014 --ptype=p --gmf=JF12 --random_seed=19990308
+Queue
+Arguments = --detector=auger2014 --ptype=p --gmf=TF17 --random_seed=19990308
+Queue
+Arguments = --detector=auger2014 --ptype=He --gmf=JF12 --random_seed=19990308
+Queue
+Arguments = --detector=auger2014 --ptype=He --gmf=TF17 --random_seed=19990308
+Queue
+Arguments = --detector=auger2014 --ptype=C --gmf=JF12 --random_seed=19990308
+Queue
+Arguments = --detector=auger2014 --ptype=C --gmf=TF17 --random_seed=19990308
+Queue
+Arguments = --detector=auger2014 --ptype=N --gmf=JF12 --random_seed=19990308
+Queue
+Arguments = --detector=auger2014 --ptype=N --gmf=TF17 --random_seed=19990308
+Queue
+Arguments = --detector=auger2014 --ptype=Si --gmf=JF12 --random_seed=19990308
+Queue
+Arguments = --detector=auger2014 --ptype=Si --gmf=TF17 --random_seed=19990308
+Queue
+Arguments = --detector=auger2014 --ptype=Fe --gmf=JF12 --random_seed=19990308
+Queue
+Arguments = --detector=auger2014 --ptype=Fe --gmf=TF17 --random_seed=19990308
+Queue
+Arguments = --detector=TA2015 --ptype=p --gmf=JF12 --random_seed=19990308
+Queue
+Arguments = --detector=TA2015 --ptype=p --gmf=TF17 --random_seed=19990308
+Queue
+Arguments = --detector=TA2015 --ptype=He --gmf=JF12 --random_seed=19990308
+Queue
+Arguments = --detector=TA2015 --ptype=He --gmf=TF17 --random_seed=19990308
+Queue
+Arguments = --detector=TA2015 --ptype=C --gmf=JF12 --random_seed=19990308
+Queue
+Arguments = --detector=TA2015 --ptype=C --gmf=TF17 --random_seed=19990308
+Queue
+Arguments = --detector=TA2015 --ptype=N --gmf=JF12 --random_seed=19990308
+Queue
+Arguments = --detector=TA2015 --ptype=N --gmf=TF17 --random_seed=19990308
+Queue
+Arguments = --detector=TA2015 --ptype=Si --gmf=JF12 --random_seed=19990308
+Queue
+Arguments = --detector=TA2015 --ptype=Si --gmf=TF17 --random_seed=19990308
+Queue
+Arguments = --detector=TA2015 --ptype=Fe --gmf=JF12 --random_seed=19990308
+Queue
+Arguments = --detector=TA2015 --ptype=Fe --gmf=TF17 --random_seed=19990308
+Queue

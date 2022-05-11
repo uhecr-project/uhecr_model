@@ -410,3 +410,6 @@ lens.cfg
 
 # make exception for txt file with TA data
 !TAdata_Egt57.txt
+uhecr_model/paper_1/calculate_fits_to_data/logs
+uhecr_model/paper_1/calculate_fits_to_data/output/*
+*logs*
