@@ -413,3 +413,7 @@ lens.cfg
 uhecr_model/paper_1/calculate_fits_to_data/logs
 uhecr_model/paper_1/calculate_fits_to_data/output/*
 *logs*
+
+# Before switching to jupytext
+*.md
+*.h5
