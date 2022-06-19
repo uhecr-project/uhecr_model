@@ -21,13 +21,13 @@ data {
 
   /* sources */
   int<lower=0> Ns;
-  unit_vector[3] varpi[Ns]; 
+  array[Ns] unit_vector[3] varpi; 
   vector[Ns] D;
   
   /* uhecr */
   int<lower=0> N; 
-  unit_vector[3] arrival_direction[N]; 
-  real<lower=0> Edet[N];
+  array[N] unit_vector[3] arrival_direction; 
+  array[N] real<lower=0> Edet;
   vector[N] zenith_angle;
   vector[N] A;
   int Z;
@@ -36,23 +36,23 @@ data {
   real<lower=0> kappa_d;  
   real<lower=0> alpha_T;
   int Ngrid;
-  vector[Ngrid] eps[Ns];
+  array[Ns] vector[Ngrid] eps;
   vector[Ngrid] kappa_grid;
 
   /* energy */
   real<lower=0> Eth;
   real<lower=0> Eerr;
-  vector[Ngrid] Earr_grid[Ns+1];
+  array[Ns+1] vector[Ngrid] Earr_grid;
   vector[Ngrid] E_grid;
   
 }
 
 transformed data {
 
-  real x_r[0];
-  int x_i[0];
+  array[0] real x_r;
+  array[0] int x_i;
   vector[Ns] Eth_src;
-  real D_in[Ns, 1];
+  array[Ns,1] real D_in;
   vector[Ns] D_kappa;
   
   /* D in Mpc for ODE solver */
@@ -100,8 +100,8 @@ transformed parameters {
   real<lower=0, upper=1> f; 
     
   /* association probability */
-  vector[Ns+1] lp[N];
-  real Earr[N];
+  array[N] vector[Ns+1] lp;
+  array[N] real Earr;
   vector[N] kappa;
   vector[Ns+1] log_F;
   
@@ -195,7 +195,7 @@ model {
 
 generated quantities {
 
-  int<lower=1, upper=Ns+1> lambda[N];
+  array[N] int<lower=1, upper=Ns+1> lambda;
 
   /* used in calculating the source-UHECR association probabilities */
   for (i in 1:N) {

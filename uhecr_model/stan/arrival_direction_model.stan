@@ -10,19 +10,19 @@ functions {
 #include vMF.stan
 #include observatory_exposure.stan
 #include utils.stan
-  
+
 }
 
 data {
 
   /* sources */
   int<lower=0> Ns;
-  unit_vector[3] varpi[Ns]; 
+  array[Ns] unit_vector[3] varpi; 
   vector[Ns] D;
   
   /* uhecr */
   int<lower=0> N; 
-  unit_vector[3] arrival_direction[N]; 
+  array[N] unit_vector[3] arrival_direction; 
   vector[N] zenith_angle;
   vector[N] A;
   
@@ -30,7 +30,7 @@ data {
   real<lower=100, upper=10000> kappa_d;  
   real<lower=0> alpha_T;
   int Ngrid;
-  vector[Ngrid] eps[Ns];
+  array[Ns] vector[Ngrid] eps;
   vector[Ngrid] kappa_grid;
   
 }
@@ -45,7 +45,7 @@ parameters {
 
   /* deflection */
   real<lower=1, upper=1000> kappa;  
-  
+
 }
 
 transformed parameters {
@@ -78,7 +78,7 @@ model {
 
   vector[Ns + 1] log_F;
   real Nex;
-  
+
   log_F = log(F);
 
   /* Nex */

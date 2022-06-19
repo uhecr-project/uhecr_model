@@ -21,8 +21,8 @@ data {
 
   /* source positions */
   int<lower=0> Ns;
-  unit_vector[3] varpi[Ns];
-  real D[Ns];
+  array[Ns] unit_vector[3] varpi;
+  array[Ns] real D;
 
   /* source spectrum */
   real alpha;
@@ -30,7 +30,7 @@ data {
   real<lower=0> Eerr;
   
   /* flux */
-  real<lower=0> L[Ns];
+  array[Ns] real<lower=0> L;
   real<lower=0> F0;
   
   /* deflection */
@@ -55,10 +55,10 @@ transformed data {
   simplex[Ns] w = get_source_weights(L, D);  
   vector[Ns+1] F;
 
-  real x_r[1];
-  int x_i[0];
+  array[1] real x_r;
+  array[0] int x_i;
   vector[Ns] Eth_src;
-  real D_in[Ns, 1];
+  array[Ns,1] real D_in;
 
   
   simplex[Ns+1] w_exposure;
@@ -86,15 +86,15 @@ transformed data {
 
 generated quantities {
 
-  int lambda[N];
+  array[N] int lambda;
   unit_vector[3] omega;
-  unit_vector[3] arrival_direction[N];
+  array[N] unit_vector[3] arrival_direction;
   real Nex_sim = Nex;
   
-  real E[N];
-  real kappa[N];
-  real Earr[N];
-  real Edet[N];
+  array[N] real E;
+  array[N] real kappa;
+  array[N] real Earr;
+  array[N] real Edet;
   
   for (i in 1:N) {
     lambda[i] = categorical_rng(w_exposure);
@@ -103,13 +103,12 @@ generated quantities {
     if (lambda[i] < Ns+1) {
 
       E[i] = spectrum_rng(alpha, Eth_src[lambda[i]]);
-      kappa[i] = get_kappa(E[i], B, D_in[lambda[i], 1] / 10);
+      kappa[i] = get_kappa(E[i], B, D_in[lambda[i], 1] / 10.0, 1);
       omega = exposure_limited_vMF_rng(varpi[lambda[i]], kappa[i], a0, theta_m);      
       Earr[i] = get_arrival_energy_sim(E[i], D_in[lambda[i]], x_r, x_i);
 
     }
   
-
     /* background */
     if (lambda[i] == Ns+1) {
 
