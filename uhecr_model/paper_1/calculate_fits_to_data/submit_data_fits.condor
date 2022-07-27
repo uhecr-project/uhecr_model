@@ -10,10 +10,6 @@ Log             = logs/log
 
 Arguments = --source=SBG_23 --detector=auger2014 --model=arrival --ptype=p --gmf=None --random_seed=19990308
 Queue
-Arguments = --source=SBG_23 --detector=auger2014 --model=arrival --ptype=N --gmf=None --random_seed=19990308
-Queue
-Arguments = --source=SBG_23 --detector=auger2014 --model=arrival --ptype=Fe --gmf=None --random_seed=19990308
-Queue
 Arguments = --source=SBG_23 --detector=auger2014 --model=joint --ptype=p --gmf=None --random_seed=19990308
 Queue
 Arguments = --source=SBG_23 --detector=auger2014 --model=joint --ptype=N --gmf=None --random_seed=19990308
@@ -27,10 +23,6 @@ Queue
 Arguments = --source=SBG_23 --detector=auger2014 --model=joint_gmf --ptype=Fe --gmf=None --random_seed=19990308
 Queue
 Arguments = --source=SBG_23 --detector=TA2015 --model=arrival --ptype=p --gmf=None --random_seed=19990308
-Queue
-Arguments = --source=SBG_23 --detector=TA2015 --model=arrival --ptype=N --gmf=None --random_seed=19990308
-Queue
-Arguments = --source=SBG_23 --detector=TA2015 --model=arrival --ptype=Fe --gmf=None --random_seed=19990308
 Queue
 Arguments = --source=SBG_23 --detector=TA2015 --model=joint --ptype=p --gmf=None --random_seed=19990308
 Queue
@@ -46,10 +38,6 @@ Arguments = --source=SBG_23 --detector=TA2015 --model=joint_gmf --ptype=Fe --gmf
 Queue
 Arguments = --source=2FHL_250Mpc --detector=auger2014 --model=arrival --ptype=p --gmf=None --random_seed=19990308
 Queue
-Arguments = --source=2FHL_250Mpc --detector=auger2014 --model=arrival --ptype=N --gmf=None --random_seed=19990308
-Queue
-Arguments = --source=2FHL_250Mpc --detector=auger2014 --model=arrival --ptype=Fe --gmf=None --random_seed=19990308
-Queue
 Arguments = --source=2FHL_250Mpc --detector=auger2014 --model=joint --ptype=p --gmf=None --random_seed=19990308
 Queue
 Arguments = --source=2FHL_250Mpc --detector=auger2014 --model=joint --ptype=N --gmf=None --random_seed=19990308
@@ -63,10 +51,6 @@ Queue
 Arguments = --source=2FHL_250Mpc --detector=auger2014 --model=joint_gmf --ptype=Fe --gmf=None --random_seed=19990308
 Queue
 Arguments = --source=2FHL_250Mpc --detector=TA2015 --model=arrival --ptype=p --gmf=None --random_seed=19990308
-Queue
-Arguments = --source=2FHL_250Mpc --detector=TA2015 --model=arrival --ptype=N --gmf=None --random_seed=19990308
-Queue
-Arguments = --source=2FHL_250Mpc --detector=TA2015 --model=arrival --ptype=Fe --gmf=None --random_seed=19990308
 Queue
 Arguments = --source=2FHL_250Mpc --detector=TA2015 --model=joint --ptype=p --gmf=None --random_seed=19990308
 Queue
@@ -82,10 +66,6 @@ Arguments = --source=2FHL_250Mpc --detector=TA2015 --model=joint_gmf --ptype=Fe 
 Queue
 Arguments = --source=swift_BAT_213 --detector=auger2014 --model=arrival --ptype=p --gmf=None --random_seed=19990308
 Queue
-Arguments = --source=swift_BAT_213 --detector=auger2014 --model=arrival --ptype=N --gmf=None --random_seed=19990308
-Queue
-Arguments = --source=swift_BAT_213 --detector=auger2014 --model=arrival --ptype=Fe --gmf=None --random_seed=19990308
-Queue
 Arguments = --source=swift_BAT_213 --detector=auger2014 --model=joint --ptype=p --gmf=None --random_seed=19990308
 Queue
 Arguments = --source=swift_BAT_213 --detector=auger2014 --model=joint --ptype=N --gmf=None --random_seed=19990308
@@ -99,10 +79,6 @@ Queue
 Arguments = --source=swift_BAT_213 --detector=auger2014 --model=joint_gmf --ptype=Fe --gmf=None --random_seed=19990308
 Queue
 Arguments = --source=swift_BAT_213 --detector=TA2015 --model=arrival --ptype=p --gmf=None --random_seed=19990308
-Queue
-Arguments = --source=swift_BAT_213 --detector=TA2015 --model=arrival --ptype=N --gmf=None --random_seed=19990308
-Queue
-Arguments = --source=swift_BAT_213 --detector=TA2015 --model=arrival --ptype=Fe --gmf=None --random_seed=19990308
 Queue
 Arguments = --source=swift_BAT_213 --detector=TA2015 --model=joint --ptype=p --gmf=None --random_seed=19990308
 Queue
