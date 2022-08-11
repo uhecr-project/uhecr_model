@@ -2,7 +2,6 @@ import os
 import argparse
 from fancy import Data, Model, Analysis
 
-
 parser = argparse.ArgumentParser(
     description="Run fits to data a selection of catalog, "
     + "detector, mass, and analysis type."
@@ -51,7 +50,7 @@ parser.add_argument(
     default="JF12",
     type=str,
     help="Selection of GMF model.",
-    choices=["JF12", "TF17", "PT11", None],
+    choices=["JF12", "TF17", "PT11", "None"],
 )
 
 parser.add_argument(
@@ -61,7 +60,6 @@ parser.add_argument(
     default=19990308,
     type=int,
     help="Random seed for Stan.",
-    # choices=["JF12", "TF17", "PT11"],
 )
 
 

@@ -7,8 +7,6 @@ import numpy as np
 from scipy.optimize import root
 from fancy import Data
 
-sys.path.append("/opt/CRPropa3/lib/python3.8/site-packages")
-
 import crpropa
 
 known_ptypes = {

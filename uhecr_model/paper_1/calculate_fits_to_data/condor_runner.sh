@@ -1,9 +1,10 @@
 #!/bin/bash
 
-# source ~/.bashrc
-# echo $PATH
-eval "$(/opt/miniconda3/condabin/conda shell.bash hook)"
+#eval "$(/opt/miniconda3/condabin/conda shell.bash hook)"
+
+# conda env @ MPP
+eval "$(/opt/anaconda3/condabin/conda  shell.bash hook)"
 conda activate uhecr_env
-# python -m site
-# python -m pip list
+
 python run_data_fits.py "$@"
+
