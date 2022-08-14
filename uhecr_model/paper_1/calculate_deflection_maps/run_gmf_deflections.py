@@ -113,17 +113,13 @@ data.add_detector(detector_properties)
 uhecr_coord = data.uhecr.coord
 uhecr_energy = data.uhecr.energy
 
-# get lon and lat arrays for future reference
-# shift lons by 180. due to how its defined in mpl
-uhecr_lons = np.pi - uhecr_coord.galactic.l.rad
-uhecr_lats = uhecr_coord.galactic.b.rad
-
-omega_true = np.zeros((len(uhecr_lons), 2))
-omega_true[:, 0] = np.pi - uhecr_lons
-omega_true[:, 1] = uhecr_lats
-
 # number of uhecrs in the sample
 N_uhecr = len(uhecr_coord)
+
+# true arrival directions of UHECRs
+omega_true = np.zeros((N_uhecr, 2))
+omega_true[:, 0] = uhecr_coord.galactic.l.rad
+omega_true[:, 1] = uhecr_coord.galactic.b.rad
 
 # also get reconstruction uncertainties
 arr_dir_unc = np.deg2rad(data.detector.coord_uncertainty)
@@ -131,22 +127,22 @@ arr_dir_unc = np.deg2rad(data.detector.coord_uncertainty)
 # convert SkyCoord -> crpropa.Vector3d() to use with CRPropa
 # coord is in galactic frame, lon and lat
 # Angle definitions:
-# CRPropa uses
-#   longitude (phi) [-pi, pi] with 0 pointing in x-direction
-#   colatitude (theta) [0, pi] with 0 pointing in z-direction
-# matplotlib expects
-#   longitude [-pi, pi] with 0 = 0 degrees
-#   latitude [pi/2, -pi/2] with pi/2 = 90 degrees (north)
+# KW 14.08: 
+# CRPropa uses (copied from Vector3.h & JF12Field.h (same for all)):
+#   longitude (phi) [-pi, pi] 
+#   colatitude (theta) [0, pi] 
 # SkyCoord uses:
 #   lon: [0, 2pi]
 #   lat: [-pi/2, pi/2]
+# Skymap uses same as SkyCoord:
+#    lon: [0,2pi]
+#    lat: [-pi/2, pi/2]
 
 uhecr_vector3d = []
 for i, coord in enumerate(uhecr_coord):
     v = crpropa.Vector3d()
-    v.setRThetaPhi(1, np.pi / 2.0 - coord.galactic.b.rad, np.pi - coord.galactic.l.rad)
+    v.setRThetaPhi(1, np.pi / 2.0 - coord.galactic.b.rad, coord.galactic.l.rad - np.pi)
     uhecr_vector3d.append(v)
-
 
 # set up CRPropa simulation and initialize objects
 sim = crpropa.ModuleList()
@@ -243,14 +239,15 @@ for j in range(Nsamples):
         time_delays[i, j] = get_time_delay(c)
 
         # append longitudes and latitudes
-        # need to append np.pi / 2 - theta for latitude
+        # KW 14.08: need to convert pi/2 - Theta, Phi - Pi
+        # to undo the conversion from SkyCoord -> Vector3d
         # also append the randomized arrival direction in lons and lats
         omega_rand[i, j, :] = (
-            rand_arrdir.getPhi(),
+            rand_arrdir.getPhi() - np.pi,
             np.pi / 2.0 - rand_arrdir.getTheta(),
         )
         omega_gal[i, j, :] = (
-            defl_dir.getPhi(),
+            defl_dir.getPhi() - np.pi,
             np.pi / 2.0 - defl_dir.getTheta(),
         )
         # defl_lons[i, j] = defl_dir.getPhi()
