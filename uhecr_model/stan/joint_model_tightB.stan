@@ -154,11 +154,12 @@ transformed parameters {
 
       /* truncated gaussian */
       lp[i, k] += normal_lpdf(Edet[i] | Earr[i], Eerr * Earr[i]);
+
       if (Edet[i] < Eth) {
-	lp[i, k] += negative_infinity();
+	      lp[i, k] += negative_infinity();
       }
       else {
-	lp[i, k] += -normal_lccdf(Eth | Earr[i], Eerr * Earr[i]);
+	      lp[i, k] += 0.0; //-normal_lccdf(Eth | Earr[i], Eerr * Earr[i]);
       }
 
       /* exposure factor */

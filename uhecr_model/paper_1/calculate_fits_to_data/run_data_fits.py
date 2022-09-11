@@ -152,7 +152,7 @@ else:
 # construct arrival model obejct
 model = Model(model_filename=model_fname, include_paths=stan_path)
 model.compile()
-model.input(Eth=Eth)  # EeV
+model.input(Eth=Eth, ptype=ptype)  # EeV
 
 # Define an Analysis object to bring together Data and Model objects
 analysis = Analysis(
