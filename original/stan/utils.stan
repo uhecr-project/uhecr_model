@@ -16,10 +16,10 @@ vector get_source_weights(real[] L, real[] D) {
   real normalisation = 0;
   
   for (k in 1:N) {
-    normalisation += (L[k] / pow(D[k], 2));
+    normalisation += (Q[k] / pow(D[k], 2));
   }
   for (k in 1:N) {
-    weights[k] = (L[k] / pow(D[k], 2)) / normalisation;
+    weights[k] = (Q[k] / pow(D[k], 2)) / normalisation;
   }
   
   return weights;
@@ -86,7 +86,7 @@ real get_Nex_sim(vector F, vector eps, real alpha_T, vector Eth_src, real Eth, r
   
 /**
  * Calculate the total source flux.
- * @param L the luminosity in s^-1
+ * @param Q the luminosity in s^-1
  * @param D the distance in Mpc
  */
 real get_Fs(real[] L, real[] D) {
@@ -95,7 +95,7 @@ real get_Fs(real[] L, real[] D) {
   real Fs = 0;
 
   for (k in 1:N) {
-    Fs += L[k] / (4 * pi() * pow(D[k], 2));
+    Fs += Q[k] / (4 * pi() * pow(D[k], 2));
   }
   
   return Fs;

@@ -74,7 +74,7 @@ transformed data {
 parameters { 
 
   /* source luminosity */
-  real<lower=0, upper=(1e5 / Ns)> L;
+  real<lower=0, upper=(1e5 / Ns)> Q;
   
   /* background flux */
   real<lower=0, upper=1e3> F0;
@@ -112,7 +112,7 @@ transformed parameters {
 
   /* define transformed paramaters */
   for (k in 1:Ns) {
-    F[k] = L / (4 * pi() * pow(D[k], 2));
+    F[k] = Q / (4 * pi() * pow(D[k], 2));
   }
   Fs = sum(F[1:Ns]); 
   F[Ns+1] = F0;
@@ -189,7 +189,7 @@ model {
   /* priors */
   alpha ~ normal(3, 2);
   B ~ normal(1, 3);
-  L ~ normal(0, 1.0e3 / Ns);
+  Q ~ normal(0, 1.0e3 / Ns);
   F0 ~ normal(0, 1.0e2);
 
 }
