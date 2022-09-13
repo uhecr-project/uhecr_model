@@ -29,7 +29,7 @@ data {
   real<lower=0> Eerr;
   
   /* flux */
-  array[Ns] real<lower=0> L;
+  array[Ns] real<lower=0> Q;
   real<lower=0> F0;
   
   /* deflection */
@@ -48,10 +48,10 @@ data {
 transformed data {
   
   /* definitions */
-  real<lower=0> Fs = get_Fs(L, D);
+  real<lower=0> Fs = get_Fs(Q , D);
   real<lower=0> F_T = F0 + Fs;
   real<lower=0, upper=1> f = Fs / F_T;
-  simplex[Ns] w = get_source_weights(L, D);  
+  simplex[Ns] w = get_source_weights(Q , D);  
   vector[Ns+1] F;
 
   array[1] real x_r;
