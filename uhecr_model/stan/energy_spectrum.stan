@@ -52,8 +52,23 @@ real spectrum_rng(real alpha, real Emin) {
  */
 real spectrum_lpdf(real E, real alpha, real Emin) {
   
-  real norm = log(alpha - 1) - log(Emin);
-  real lprob = -alpha * log(E / Emin);
-  
+  real norm;
+  real lprob; 
+  real new_alpha;
+
+  if (alpha == 1.0) {
+
+    new_alpha = alpha - 1e-10;
+
+  }
+  else {
+
+    new_alpha = alpha;
+
+  }
+
+  norm = log(alpha - 1) - log(Emin);
+  lprob = -alpha * log(E / Emin);
+
   return lprob + norm;
 }

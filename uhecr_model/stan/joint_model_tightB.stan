@@ -42,6 +42,7 @@ data {
   /* energy */
   real<lower=0> Eth;
   real<lower=0> Eerr;
+  vector[Ns] Eth_src; 
   array[Ns+1] vector[Ngrid] Earr_grid;
   vector[Ngrid] E_grid;
   
@@ -51,7 +52,7 @@ transformed data {
 
   array[0] real x_r;
   array[0] int x_i;
-  vector[Ns] Eth_src;
+  //vector[Ns] Eth_src;
   array[Ns,1] real D_in;
   vector[Ns] D_kappa;
   
@@ -66,7 +67,7 @@ transformed data {
   }
   
   /* Equivalent Eth at sources */
-  Eth_src = get_Eth_src(Eth, D_in, x_r, x_i);
+  //Eth_src = get_Eth_src(Eth, D_in, x_r, x_i);
   
 }
 
@@ -81,12 +82,14 @@ parameters {
   
   /* magnetic field strength */
   real<lower=1, upper=1e2> B;
+
   
   /* energy spectrum */
   real<lower=1, upper=10> alpha;  
   vector<lower=Eth, upper=1e4>[N] E;
 
 }
+
 
 
 transformed parameters {
@@ -139,8 +142,9 @@ transformed parameters {
 	//Earr[i] = get_arrival_energy(E[i], D_in[k], x_r, x_i); // full calc
 	Earr[i] = interpolate(E_grid, Earr_grid[k], E[i]); // interpolation
 	
-	lp[i, k] += pareto_lpdf(E[i] | Eth, alpha - 1);
-      
+	//lp[i, k] += pareto_lpdf(E[i] | Eth, alpha - 1);
+  lp[i, k] += spectrum_lpdf(E[i] | alpha, Eth);
+
       }
       
       /* background */
@@ -148,12 +152,13 @@ transformed parameters {
 
 	lp[i, k] += log(1 / ( 4 * pi() ));
 	Earr[i] = E[i];
-	lp[i, k] += pareto_lpdf(E[i] | Eth, alpha - 1);
-      
+	//lp[i, k] += pareto_lpdf(E[i] | Eth, alpha - 1);
+  lp[i, k] += spectrum_lpdf(E[i] | alpha, Eth);
+
       }
 
       /* truncated gaussian */
-      lp[i, k] += normal_lpdf(Edet[i] | Earr[i], Eerr * Earr[i]);
+      lp[i, k] += normal_lpdf(Edet[i] | Earr[i], Eerr * Earr[i] * 1.1);
 
       if (Edet[i] < Eth) {
 	      lp[i, k] += negative_infinity();

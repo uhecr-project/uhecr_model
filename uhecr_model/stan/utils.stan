@@ -314,7 +314,7 @@ real fik_lpdf(vector v, vector mu, real kappa, real kappa_d) {
 
 /**
  * Calculate the deflection parameter of the vMF distribution.
- * Derived from Eq. 4 and Eq. 9 in Cape; & Mortlock, 2018.
+ * Derived from Eq. 4 and Eq. 9 in Capel & Mortlock, 2018.
  * @param E energy in EeV
  * @param B rms magnetic field strength in nG
  * @param D distance in Mpc / 10
