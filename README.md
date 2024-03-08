@@ -1,5 +1,7 @@
 # Impact of using the UHECR arrival energies to constrain source associations
 
+# NOTE: this repository is currently archived. The work is now located in uhecr-project/uhecr_model_private, until we decide to make it public, in which that repository will be merged into this one.
+
 [![DOI](https://zenodo.org/badge/166797043.svg)](https://zenodo.org/badge/latestdoi/166797043)
 
 Code used in [arXiv:1811.06464](https://arxiv.org/abs/1811.06464). The directories here are organised to follow the paper and 
