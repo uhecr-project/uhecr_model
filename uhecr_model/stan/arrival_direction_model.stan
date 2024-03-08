@@ -10,19 +10,19 @@ functions {
 #include vMF.stan
 #include observatory_exposure.stan
 #include utils.stan
-  
+
 }
 
 data {
 
   /* sources */
   int<lower=0> Ns;
-  unit_vector[3] varpi[Ns]; 
+  array[Ns] unit_vector[3] varpi; 
   vector[Ns] D;
   
   /* uhecr */
   int<lower=0> N; 
-  unit_vector[3] arrival_direction[N]; 
+  array[N] unit_vector[3] arrival_direction; 
   vector[N] zenith_angle;
   vector[N] A;
   
@@ -30,7 +30,7 @@ data {
   real<lower=100, upper=10000> kappa_d;  
   real<lower=0> alpha_T;
   int Ngrid;
-  vector[Ngrid] eps[Ns];
+  array[Ns] vector[Ngrid] eps;
   vector[Ngrid] kappa_grid;
   
 }
@@ -38,14 +38,14 @@ data {
 parameters { 
 
   /* source luminosity */
-  real<lower=0, upper=(1e5 / Ns)> L;
+  real<lower=0, upper=(1e5 / Ns)> Q;
   
   /* background flux */
   real<lower=0, upper=1e3> F0;
 
   /* deflection */
   real<lower=1, upper=1000> kappa;  
-  
+
 }
 
 transformed parameters {
@@ -63,7 +63,7 @@ transformed parameters {
 
   Fs = 0;
   for (k in 1:Ns) {
-    F[k] = L / (4 * pi() * pow(D[k], 2));
+    F[k] = Q / (4 * pi() * pow(D[k], 2));
     Fs += F[k];
   }
   F[Ns + 1] = F0;
@@ -78,7 +78,7 @@ model {
 
   vector[Ns + 1] log_F;
   real Nex;
-  
+
   log_F = log(F);
 
   /* Nex */
@@ -111,7 +111,7 @@ model {
   /* priors */
   kappa ~ lognormal(log(100.), 1.);
 
-  L ~ normal(0, 1.0e3 / Ns);
+  Q ~ normal(0, 1.0e3 / Ns);
   F0 ~ normal(0, 1.0e2);
 
 }

@@ -8,7 +8,7 @@
 /**
  * Calculate weights from source distances.
  */
-vector get_source_weights(real[] L, real[] D) {
+vector get_source_weights(array[] real Q, array[] real D) {
   
   int N = num_elements(D);
   vector[N] weights;
@@ -16,10 +16,10 @@ vector get_source_weights(real[] L, real[] D) {
   real normalisation = 0;
   
   for (k in 1:N) {
-    normalisation += (L[k] / pow(D[k], 2));
+    normalisation += (Q[k] / pow(D[k], 2));
   }
   for (k in 1:N) {
-    weights[k] = (L[k] / pow(D[k], 2)) / normalisation;
+    weights[k] = (Q[k] / pow(D[k], 2)) / normalisation;
   }
   
   return weights;
@@ -86,16 +86,16 @@ real get_Nex_sim(vector F, vector eps, real alpha_T, vector Eth_src, real Eth, r
   
 /**
  * Calculate the total source flux.
- * @param L the luminosity in s^-1
+ * @param Q the luminosity in s^-1
  * @param D the distance in Mpc
  */
-real get_Fs(real[] L, real[] D) {
+real get_Fs(array[] real Q, array[] real D) {
   
   int N = num_elements(D);
   real Fs = 0;
 
   for (k in 1:N) {
-    Fs += L[k] / (4 * pi() * pow(D[k], 2));
+    Fs += Q[k] / (4 * pi() * pow(D[k], 2));
   }
   
   return Fs;
@@ -108,7 +108,7 @@ real get_Fs(real[] L, real[] D) {
  */
 vector exposure_limited_vMF_rng(vector varpi, real kappa, real a0, real theta_m) {
   
-  real params[3];
+  array[3] real params;
   real m_max;
   real accept;
   int count;
@@ -168,7 +168,7 @@ vector exposure_limited_vMF_rng(vector varpi, real kappa, real a0, real theta_m)
  */
 vector exposure_limited_sphere_rng(real a0, real theta_m) {
   
-  real params[3];
+  array[3] real params;
   real m_max;
   real accept;
   vector[3] omega;
@@ -253,7 +253,7 @@ real interpolate(vector x_values, vector y_values, real x) {
  * interpolating over a vector of eps values
  * for each source.
  */
-real get_Nex(vector F, vector[] eps, vector kappa_grid, vector kappa, real alpha_T, vector Eth_src, real Eth, real alpha) {
+real get_Nex(vector F, array[] vector eps, vector kappa_grid, vector kappa, real alpha_T, vector Eth_src, real Eth, real alpha) {
   
   int Ns = num_elements(F);
   vector[Ns] N;
@@ -275,7 +275,7 @@ real get_Nex(vector F, vector[] eps, vector kappa_grid, vector kappa, real alpha
  * This version ignores energy information and is 
  * to be used in the arrival direction only models.
  */
-real get_Nex_arr(vector F, vector[] eps, vector kappa_grid, real kappa, real alpha_T) {
+real get_Nex_arr(vector F, array[] vector eps, vector kappa_grid, real kappa, real alpha_T) {
   
   int Ns = num_elements(F);
   vector[Ns] N;
@@ -350,7 +350,7 @@ vector get_Eex(real alpha, vector Eth_src) {
   return Eex;
 }
 
-vector get_eps_from_kappa(vector kappa_grid, vector[] eps, vector kappa_ex) {
+vector get_eps_from_kappa(vector kappa_grid, array[] vector eps, vector kappa_ex) {
   
   int N = num_elements(kappa_ex);
   vector[N] eps_from_kappa;

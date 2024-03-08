@@ -4,6 +4,6 @@
 
 # conda env @ MPP
 eval "$(/opt/anaconda3/condabin/conda  shell.bash hook)"
-conda activate uhecr_env
+conda activate uhecr_env1
 
-python run_gmf_deflections.py "$@"
+python run_extragalactic_propagations.py "$@"

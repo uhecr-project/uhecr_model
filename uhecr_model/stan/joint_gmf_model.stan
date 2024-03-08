@@ -21,13 +21,13 @@ data {
 
   /* sources */
   int<lower=0> Ns;
-  unit_vector[3] varpi[Ns]; 
+  array[Ns] unit_vector[3] varpi; 
   vector[Ns] D;
   
   /* uhecr */
   int<lower=0> N; 
-  unit_vector[3] arrival_direction[N]; 
-  real<lower=0> Edet[N];
+  array[N] unit_vector[3] arrival_direction; 
+  array[N] real<lower=0> Edet;
   vector[N] zenith_angle;
   vector[N] A;
   vector[N] kappa_gmf;  
@@ -36,23 +36,23 @@ data {
   /* observatory */ 
   real<lower=0> alpha_T;
   int Ngrid;
-  vector[Ngrid] eps[Ns];
+  array[Ns] vector[Ngrid] eps;
   vector[Ngrid] kappa_grid;
 
   /* energy */
   real<lower=0> Eth;
   real<lower=0> Eerr;
-  vector[Ngrid] Earr_grid[Ns+1];
+  array[Ns+1] vector[Ngrid] Earr_grid;
   vector[Ngrid] E_grid;
   
 }
 
 transformed data {
 
-  real x_r[0];
-  int x_i[0];
+  array[0] real x_r;
+  array[0] int x_i;
   vector[Ns] Eth_src;
-  real D_in[Ns, 1];
+  array[Ns,1] real D_in;
   vector[Ns] D_kappa;
   
   /* D in Mpc for ODE solver */
@@ -74,7 +74,7 @@ transformed data {
 parameters { 
 
   /* source luminosity */
-  real<lower=0, upper=(1e5 / Ns)> L;
+  real<lower=0, upper=(1e5 / Ns)> Q;
   
   /* background flux */
   real<lower=0, upper=1e3> F0;
@@ -98,10 +98,10 @@ transformed parameters {
   
   /* associated fraction */
   real<lower=0, upper=1> f; 
-    
+
   /* association probability */
-  vector[Ns+1] lp[N];
-  real Earr[N];
+  array[N] vector[Ns+1] lp;
+  array[N] real Earr;
   vector[N] kappa;
   vector[Ns+1] log_F;
   
@@ -112,7 +112,7 @@ transformed parameters {
 
   /* define transformed paramaters */
   for (k in 1:Ns) {
-    F[k] = L / (4 * pi() * pow(D[k], 2));
+    F[k] = Q / (4 * pi() * pow(D[k], 2));
   }
   Fs = sum(F[1:Ns]); 
   F[Ns+1] = F0;
@@ -188,14 +188,14 @@ model {
   /* priors */
   alpha ~ normal(3, 2);
   B ~ normal(50, 50);
-  L ~ normal(0, 1.0e3 / Ns);
+  Q ~ normal(0, 1.0e3 / Ns);
   F0 ~ normal(0, 1.0e2);
 
 }
 
 generated quantities {
 
-  int<lower=1, upper=Ns+1> lambda[N];
+  array[N] int<lower=1, upper=Ns+1> lambda;
 
   /* used in calculating the source-UHECR association probabilities */
   for (i in 1:N) {

@@ -1,8 +1,8 @@
 Executable      = condor_runner.sh
 Universe        = vanilla
 #request_gpus   = 1
-request_cpus    = 8
-request_memory  = 4 GB
+request_cpus    = 1
+request_memory  = 2 GB
 run_as_owner    = True
 Error           = logs/err
 Output          = logs/out
@@ -10,27 +10,19 @@ Log             = logs/log
 
 Arguments = --source=SBG_23 --detector=auger2014 --model=arrival --ptype=p --gmf=None --random_seed=19990308
 Queue
-Arguments = --source=SBG_23 --detector=auger2014 --model=arrival --ptype=N --gmf=None --random_seed=19990308
-Queue
-Arguments = --source=SBG_23 --detector=auger2014 --model=arrival --ptype=Fe --gmf=None --random_seed=19990308
-Queue
 Arguments = --source=SBG_23 --detector=auger2014 --model=joint --ptype=p --gmf=None --random_seed=19990308
 Queue
 Arguments = --source=SBG_23 --detector=auger2014 --model=joint --ptype=N --gmf=None --random_seed=19990308
 Queue
 Arguments = --source=SBG_23 --detector=auger2014 --model=joint --ptype=Fe --gmf=None --random_seed=19990308
 Queue
-Arguments = --source=SBG_23 --detector=auger2014 --model=joint_gmf --ptype=p --gmf=None --random_seed=19990308
+Arguments = --source=SBG_23 --detector=auger2014 --model=joint_gmf --ptype=p --gmf=JF12 --random_seed=19990308
 Queue
-Arguments = --source=SBG_23 --detector=auger2014 --model=joint_gmf --ptype=N --gmf=None --random_seed=19990308
+Arguments = --source=SBG_23 --detector=auger2014 --model=joint_gmf --ptype=N --gmf=JF12 --random_seed=19990308
 Queue
-Arguments = --source=SBG_23 --detector=auger2014 --model=joint_gmf --ptype=Fe --gmf=None --random_seed=19990308
+Arguments = --source=SBG_23 --detector=auger2014 --model=joint_gmf --ptype=Fe --gmf=JF12 --random_seed=19990308
 Queue
 Arguments = --source=SBG_23 --detector=TA2015 --model=arrival --ptype=p --gmf=None --random_seed=19990308
-Queue
-Arguments = --source=SBG_23 --detector=TA2015 --model=arrival --ptype=N --gmf=None --random_seed=19990308
-Queue
-Arguments = --source=SBG_23 --detector=TA2015 --model=arrival --ptype=Fe --gmf=None --random_seed=19990308
 Queue
 Arguments = --source=SBG_23 --detector=TA2015 --model=joint --ptype=p --gmf=None --random_seed=19990308
 Queue
@@ -38,17 +30,13 @@ Arguments = --source=SBG_23 --detector=TA2015 --model=joint --ptype=N --gmf=None
 Queue
 Arguments = --source=SBG_23 --detector=TA2015 --model=joint --ptype=Fe --gmf=None --random_seed=19990308
 Queue
-Arguments = --source=SBG_23 --detector=TA2015 --model=joint_gmf --ptype=p --gmf=None --random_seed=19990308
+Arguments = --source=SBG_23 --detector=TA2015 --model=joint_gmf --ptype=p --gmf=JF12 --random_seed=19990308
 Queue
-Arguments = --source=SBG_23 --detector=TA2015 --model=joint_gmf --ptype=N --gmf=None --random_seed=19990308
+Arguments = --source=SBG_23 --detector=TA2015 --model=joint_gmf --ptype=N --gmf=JF12 --random_seed=19990308
 Queue
-Arguments = --source=SBG_23 --detector=TA2015 --model=joint_gmf --ptype=Fe --gmf=None --random_seed=19990308
+Arguments = --source=SBG_23 --detector=TA2015 --model=joint_gmf --ptype=Fe --gmf=JF12 --random_seed=19990308
 Queue
 Arguments = --source=2FHL_250Mpc --detector=auger2014 --model=arrival --ptype=p --gmf=None --random_seed=19990308
-Queue
-Arguments = --source=2FHL_250Mpc --detector=auger2014 --model=arrival --ptype=N --gmf=None --random_seed=19990308
-Queue
-Arguments = --source=2FHL_250Mpc --detector=auger2014 --model=arrival --ptype=Fe --gmf=None --random_seed=19990308
 Queue
 Arguments = --source=2FHL_250Mpc --detector=auger2014 --model=joint --ptype=p --gmf=None --random_seed=19990308
 Queue
@@ -56,17 +44,13 @@ Arguments = --source=2FHL_250Mpc --detector=auger2014 --model=joint --ptype=N --
 Queue
 Arguments = --source=2FHL_250Mpc --detector=auger2014 --model=joint --ptype=Fe --gmf=None --random_seed=19990308
 Queue
-Arguments = --source=2FHL_250Mpc --detector=auger2014 --model=joint_gmf --ptype=p --gmf=None --random_seed=19990308
+Arguments = --source=2FHL_250Mpc --detector=auger2014 --model=joint_gmf --ptype=p --gmf=JF12 --random_seed=19990308
 Queue
-Arguments = --source=2FHL_250Mpc --detector=auger2014 --model=joint_gmf --ptype=N --gmf=None --random_seed=19990308
+Arguments = --source=2FHL_250Mpc --detector=auger2014 --model=joint_gmf --ptype=N --gmf=JF12 --random_seed=19990308
 Queue
-Arguments = --source=2FHL_250Mpc --detector=auger2014 --model=joint_gmf --ptype=Fe --gmf=None --random_seed=19990308
+Arguments = --source=2FHL_250Mpc --detector=auger2014 --model=joint_gmf --ptype=Fe --gmf=JF12 --random_seed=19990308
 Queue
 Arguments = --source=2FHL_250Mpc --detector=TA2015 --model=arrival --ptype=p --gmf=None --random_seed=19990308
-Queue
-Arguments = --source=2FHL_250Mpc --detector=TA2015 --model=arrival --ptype=N --gmf=None --random_seed=19990308
-Queue
-Arguments = --source=2FHL_250Mpc --detector=TA2015 --model=arrival --ptype=Fe --gmf=None --random_seed=19990308
 Queue
 Arguments = --source=2FHL_250Mpc --detector=TA2015 --model=joint --ptype=p --gmf=None --random_seed=19990308
 Queue
@@ -74,17 +58,13 @@ Arguments = --source=2FHL_250Mpc --detector=TA2015 --model=joint --ptype=N --gmf
 Queue
 Arguments = --source=2FHL_250Mpc --detector=TA2015 --model=joint --ptype=Fe --gmf=None --random_seed=19990308
 Queue
-Arguments = --source=2FHL_250Mpc --detector=TA2015 --model=joint_gmf --ptype=p --gmf=None --random_seed=19990308
+Arguments = --source=2FHL_250Mpc --detector=TA2015 --model=joint_gmf --ptype=p --gmf=JF12 --random_seed=19990308
 Queue
-Arguments = --source=2FHL_250Mpc --detector=TA2015 --model=joint_gmf --ptype=N --gmf=None --random_seed=19990308
+Arguments = --source=2FHL_250Mpc --detector=TA2015 --model=joint_gmf --ptype=N --gmf=JF12 --random_seed=19990308
 Queue
-Arguments = --source=2FHL_250Mpc --detector=TA2015 --model=joint_gmf --ptype=Fe --gmf=None --random_seed=19990308
+Arguments = --source=2FHL_250Mpc --detector=TA2015 --model=joint_gmf --ptype=Fe --gmf=JF12 --random_seed=19990308
 Queue
 Arguments = --source=swift_BAT_213 --detector=auger2014 --model=arrival --ptype=p --gmf=None --random_seed=19990308
-Queue
-Arguments = --source=swift_BAT_213 --detector=auger2014 --model=arrival --ptype=N --gmf=None --random_seed=19990308
-Queue
-Arguments = --source=swift_BAT_213 --detector=auger2014 --model=arrival --ptype=Fe --gmf=None --random_seed=19990308
 Queue
 Arguments = --source=swift_BAT_213 --detector=auger2014 --model=joint --ptype=p --gmf=None --random_seed=19990308
 Queue
@@ -92,17 +72,13 @@ Arguments = --source=swift_BAT_213 --detector=auger2014 --model=joint --ptype=N 
 Queue
 Arguments = --source=swift_BAT_213 --detector=auger2014 --model=joint --ptype=Fe --gmf=None --random_seed=19990308
 Queue
-Arguments = --source=swift_BAT_213 --detector=auger2014 --model=joint_gmf --ptype=p --gmf=None --random_seed=19990308
+Arguments = --source=swift_BAT_213 --detector=auger2014 --model=joint_gmf --ptype=p --gmf=JF12 --random_seed=19990308
 Queue
-Arguments = --source=swift_BAT_213 --detector=auger2014 --model=joint_gmf --ptype=N --gmf=None --random_seed=19990308
+Arguments = --source=swift_BAT_213 --detector=auger2014 --model=joint_gmf --ptype=N --gmf=JF12 --random_seed=19990308
 Queue
-Arguments = --source=swift_BAT_213 --detector=auger2014 --model=joint_gmf --ptype=Fe --gmf=None --random_seed=19990308
+Arguments = --source=swift_BAT_213 --detector=auger2014 --model=joint_gmf --ptype=Fe --gmf=JF12 --random_seed=19990308
 Queue
 Arguments = --source=swift_BAT_213 --detector=TA2015 --model=arrival --ptype=p --gmf=None --random_seed=19990308
-Queue
-Arguments = --source=swift_BAT_213 --detector=TA2015 --model=arrival --ptype=N --gmf=None --random_seed=19990308
-Queue
-Arguments = --source=swift_BAT_213 --detector=TA2015 --model=arrival --ptype=Fe --gmf=None --random_seed=19990308
 Queue
 Arguments = --source=swift_BAT_213 --detector=TA2015 --model=joint --ptype=p --gmf=None --random_seed=19990308
 Queue
@@ -110,9 +86,9 @@ Arguments = --source=swift_BAT_213 --detector=TA2015 --model=joint --ptype=N --g
 Queue
 Arguments = --source=swift_BAT_213 --detector=TA2015 --model=joint --ptype=Fe --gmf=None --random_seed=19990308
 Queue
-Arguments = --source=swift_BAT_213 --detector=TA2015 --model=joint_gmf --ptype=p --gmf=None --random_seed=19990308
+Arguments = --source=swift_BAT_213 --detector=TA2015 --model=joint_gmf --ptype=p --gmf=JF12 --random_seed=19990308
 Queue
-Arguments = --source=swift_BAT_213 --detector=TA2015 --model=joint_gmf --ptype=N --gmf=None --random_seed=19990308
+Arguments = --source=swift_BAT_213 --detector=TA2015 --model=joint_gmf --ptype=N --gmf=JF12 --random_seed=19990308
 Queue
-Arguments = --source=swift_BAT_213 --detector=TA2015 --model=joint_gmf --ptype=Fe --gmf=None --random_seed=19990308
+Arguments = --source=swift_BAT_213 --detector=TA2015 --model=joint_gmf --ptype=Fe --gmf=JF12 --random_seed=19990308
 Queue
